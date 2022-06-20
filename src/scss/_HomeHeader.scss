@@ -1,2 +1,23 @@
 @import "settings/fonts";
 @import "settings/colors";
+
+.home-header {
+  height: 300px;
+
+  .home-header-logging {
+    display: flex;
+    gap: 30px;
+  }
+
+  .home-header-nav {
+
+    .menu-list {
+      display: flex;
+      gap: 55px;
+
+      li {
+        cursor: pointer;
+      }
+    }
+  }
+}

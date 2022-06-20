@@ -4,4 +4,11 @@
 
 body {
   font-family: $font-base;
+   background-color: #fff;
+   color: $text-color;
+ }
+
+.container {
+  width: 1280px;
+  margin: 0 auto;
 }

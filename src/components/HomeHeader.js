@@ -1,9 +1,18 @@
 import React from 'react';
+import HomeOpening from "./HomeOpening";
+import '../scss/_HomeHeader.scss';
+import {Link} from "react-router-dom";
+import HomeHeaderNav from "./HomeHeaderNav";
+
 
 const HomeHeader = () => {
     return (
-        <div>
-            headeer
+        <div className="home-header container">
+            <div className="home-header-logging">
+                <Link to="/logowanie">Zaloguj</Link>
+                <Link to="/rejestracja">Załóż konto</Link>
+            </div>
+            <HomeHeaderNav/>
         </div>
     );
 };
