@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeOpening from "./HomeOpening";
 import '../scss/_HomeHeader.scss';
 import {Link} from "react-router-dom";
 import HomeHeaderNav from "./HomeHeaderNav";
