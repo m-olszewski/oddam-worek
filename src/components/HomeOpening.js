@@ -1,7 +1,7 @@
 import React from 'react';
 import '../scss/_HomeOpening.scss';
 import {Link} from "react-router-dom";
-import {ReactComponent as DecorationSvg} from '../assets/icons/Decoration.svg';
+import TitleSVG from "./TitleSVG";
 
 const HomeOpening = () => {
     return (
@@ -10,9 +10,7 @@ const HomeOpening = () => {
                 <img src={require('../assets/images/Home-Hero-Image.jpg')} alt="home-hero"/>
             </div>
             <div className="home-opening-right">
-                <h2>Zacznij pomagać!<br/>
-                    Oddaj niechciane rzeczy w zaufane ręce</h2>
-                <DecorationSvg/>
+                <TitleSVG title1line="Zacznij pomagać!" title2line="Oddaj niechciane rzeczy w zaufane ręce"/>
                 <div className="home-opening-right-btns">
                     <Link to="/logowanie">
                         <div className="home-opening-right-btn-single">Oddaj<br/>
