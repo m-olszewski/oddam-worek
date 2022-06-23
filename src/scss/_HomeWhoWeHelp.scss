@@ -1,0 +1,103 @@
+@import "settings/fonts";
+@import "settings/colors";
+
+.home-wwh {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 50px;
+
+  h2 {
+    font-size: 32px;
+    letter-spacing: -0.76px;
+    margin-bottom: 25px;
+  }
+
+  .home-wwh-btns {
+    margin-top: 35px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    .home-wwh-btn-single {
+      font-size: 18px;
+      width: 160px;
+      border: 1px solid $text-color;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .home-wwh-text {
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+
+  .home-wwh-organizations {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 50px;
+    gap: 30px;
+    margin-bottom: 30px;
+
+    .single-organization {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 1px solid $text-color;
+
+      &:last-child {
+        border: none;
+      }
+
+      .single-organization-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .fundacja {
+
+          .fundacja-name {
+
+          }
+        }
+
+        .mission {
+          font-size: 12px;
+        }
+
+        .mission-text {
+
+        }
+      }
+
+      .single-organization-right {
+        font-size: 12px;
+
+      }
+    }
+  }
+
+  .home-wwh-organizations-paginationCounter {
+    display: flex;
+    gap: 15px;
+
+    .single-paginationCounter {
+      padding: 10px;
+      font-size: 12px;
+
+      &:first-child {
+        border: 1px solid $text-color;
+      }
+    }
+  }
+
+}
