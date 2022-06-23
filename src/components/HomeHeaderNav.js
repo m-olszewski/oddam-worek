@@ -19,7 +19,7 @@ const HomeHeaderNav = () => {
                     <Link to="about"
                           spy={true}
                           smooth={true}
-                          duration={500}
+                          duration={750}
                     >O nas</Link>
                 </li>
                 <li>

@@ -1,0 +1,48 @@
+@import "settings/fonts";
+@import "settings/colors";
+
+.home-about {
+  display: flex;
+
+  .home-about-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    h2 {
+      font-size: 32px;
+      letter-spacing: -0.76px;
+      margin-bottom: 25px;
+    }
+
+    .home-about-text {
+      max-width: 450px;
+      font-size: 20px;
+      letter-spacing: -0.6px;
+      margin-top: 25px;
+    }
+  }
+
+  .home-about-left div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-about-left div svg {
+    align-self: end;
+    margin-top: 15px;
+  }
+
+  .home-about-right {
+    width: 50%;
+
+    img {
+aspect-ratio: 1 / 1;
+      object-position: left;
+      object-fit: cover;
+    }
+  }
+}

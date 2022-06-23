@@ -6,6 +6,8 @@ import HomeWTF from "./HomeWTF";
 
 import '../scss/_Home.scss';
 import HomeOpening from "./HomeOpening";
+import HomeAbout from "./HomeAbout";
+import HomeWhoWeHelp from "./HomeWhoWeHelp";
 
 const Home = () => {
     return (
@@ -14,6 +16,8 @@ const Home = () => {
             <HomeOpening/>
             <HomeThreeColumns/>
             <HomeWTF/>
+            <HomeAbout/>
+            <HomeWhoWeHelp/>
         </>
     );
 };
