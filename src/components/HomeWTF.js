@@ -2,10 +2,10 @@ import React from 'react';
 import '../scss/_HomeWTF.scss';
 import {Element} from 'react-scroll';
 import TitleSVG from "./TitleSVG";
-import {ReactComponent as TShirtSvg} from "../assets/icons/Icon-1.svg";
-import {ReactComponent as BagSvg} from "../assets/icons/Icon-2.svg";
-import {ReactComponent as LupeSvg} from "../assets/icons/Icon-3.svg";
-import {ReactComponent as ArrowsSvg} from "../assets/icons/Icon-4.svg";
+import TShirtSvg from "../assets/icons/Icon-1.svg";
+import BagSvg from "../assets/icons/Icon-2.svg";
+import LupeSvg from "../assets/icons/Icon-3.svg";
+import ArrowsSvg from "../assets/icons/Icon-4.svg";
 import {Link} from "react-router-dom";
 
 const Article = (props) => {
@@ -28,16 +28,16 @@ const HomeWtf = () => {
             <div className="home-wtf">
                 <TitleSVG title1line="Wystarczą 4 proste kroki"/>
                 <div className="home-wtf-articles">
-                    <Article svg={<TShirtSvg/>}
+                    <Article svg={<img src={TShirtSvg}  alt="tshit icon"/>}
                              title="Wybierz rzeczy"
                              text="ubrania, zabawki, sprzęt i inne"/>
-                    <Article svg={<BagSvg/>}
+                    <Article svg={<img src={BagSvg}  alt="bag icon"/>}
                              title="Spakuj je"
                              text="skorzystaj z worków na śmieci"/>
-                    <Article svg={<LupeSvg/>}
+                    <Article svg={<img src={LupeSvg}  alt="lupe icon"/>}
                              title="Zdecyduj komu chcesz pomóc"
                              text="wybierz zaufane miejsce"/>
-                    <Article svg={<ArrowsSvg/>}
+                    <Article svg={<img src={ArrowsSvg}  alt="arrows icon"/>}
                              title="Zamów kuriera"
                              text="kurier przyjedzie w dogodnym terminie"/>
                 </div>
