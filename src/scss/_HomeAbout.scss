@@ -18,11 +18,22 @@
       margin-bottom: 25px;
     }
 
-    .home-about-text {
-      max-width: 450px;
-      font-size: 20px;
-      letter-spacing: -0.6px;
-      margin-top: 25px;
+    .home-about-left-text-container {
+      display: flex;
+      flex-direction: column;
+
+      .home-about-text {
+        max-width: 450px;
+        font-size: 20px;
+        letter-spacing: -0.6px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+
+      .icon {
+        width: 160px;
+        align-self: end;
+      }
     }
   }
 
@@ -40,7 +51,6 @@
     width: 50%;
 
     img {
-aspect-ratio: 1 / 1;
       object-position: left;
       object-fit: cover;
     }
