@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Element} from 'react-scroll';
 import '../scss/_HomeWhoWeHelp.scss';
 import TitleSVG from "./TitleSVG";
+
+const SingleBtn = (props) => {
+    return (
+        <div onClick={props.onClick} className="home-wwh-btn-single">{props.title}</div>
+    );
+};
 
 const SingleOrganization = (props) => {
     return (
         <div className="single-organization">
             <div className="single-organization-left">
                 <span className="fundacja">Fundacja
-                    <span className="fundacja-name"> "{props.fundName}"</span>
+                    <span className="fundacja-name"> "{props.foundationName}"</span>
                 </span>
                 <span className="mission">Cel i misja:
                     <span className="mission-text"> {props.missionText}</span>
@@ -21,41 +27,75 @@ const SingleOrganization = (props) => {
     );
 };
 
-const SingleBtn = (props) => {
-    return (
-        <div className="home-wwh-btn-single">{props.title}</div>
-    );
-};
-
 const HomeWhoWeHelp = () => {
+    const [currentList, setCurrentList] = useState("fundacje");
+    const [listType, setListType] = useState({
+        description: "",
+        foundationList: []
+    });
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handleChangeCurrent = (listType) => () => {
+        setCurrentList(listType)
+    };
+
+    useEffect(() => {
+        fetch(`http://localhost:3005/${currentList}`)
+            .then(resp => resp.json())
+            .then(data => setListType(data))
+            .catch(err => console.log(err))
+    }, [currentList]);
+
+    const numberOfFoundations = listType.foundationList.length;
+    const foundationsPerPage = 3;
+    const numberOfPages = Math.ceil(numberOfFoundations / foundationsPerPage);
+
+    const getItems = () => {
+        const startList = (currentPage - 1) * foundationsPerPage
+        const endList = startList + foundationsPerPage
+        console.log(`fundacji: ${numberOfFoundations}, stron: ${numberOfPages}`);
+
+        return listType.foundationList.slice(startList, endList);
+    };
+
+    const paginationButtons = () => {
+        const pageNumbers = [];
+
+        for (let i = 1; i <= numberOfPages; i++) {
+            pageNumbers.push(i)
+        }
+        console.log(`numer str ${pageNumbers}`);
+        return pageNumbers;
+    };
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     return (
         <Element name="organizations">
             <div className="home-wwh container">
                 <TitleSVG title1line="Komu pomagamy?"/>
                 <div className="home-wwh-btns">
-                    <SingleBtn title="Fundacjom"/>
-                    <SingleBtn title="Organizacjom pozarządowym"/>
-                    <SingleBtn title="Lokalnym zbiórkom"/>
+                    <SingleBtn onClick={handleChangeCurrent("fundacje")} title="Fundacjom"/>
+                    <SingleBtn onClick={handleChangeCurrent("organizacje")} title="Organizacjom pozarządowym"/>
+                    <SingleBtn onClick={handleChangeCurrent("zbiorki")} title="Lokalnym zbiórkom"/>
                 </div>
                 <p className="home-wwh-text">
-                    W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy. Możesz sprawdzić
-                    czym się zajmują, komu pomagają i czego potrzebują.
+                    {listType.description}
                 </p>
                 <div className="home-wwh-organizations">
-                    <SingleOrganization fundName="Dbam o zdrowie"
-                                        missionText="Pomoc osobom znajdującym się w trudnej sytuacji życiowej."
-                                        items="ubrania, jedzenie, sprzęt AGD, meble, zabawki"/>
-                    <SingleOrganization fundName="Dla dzieci"
-                                        missionText="Pomoc dzieciom z ubogich rodzin."
-                                        items="ubrania, meble, zabawki"/>
-                    <SingleOrganization fundName="Bez domu"
-                                        missionText="Pomoc dla osób nie posiadających miejsca zamieszkania."
-                                        items="ubrania, jedzenie, ciepłe koce"/>
+                    {getItems().map((el, i) => (
+                        <SingleOrganization key={i} foundationName={el.title}
+                                            missionText={el.subtitle}
+                                            items={el.others.join(', ')}/>
+                    ))
+                    }
                 </div>
+
                 <div className="home-wwh-organizations-paginationCounter">
-                    <span className="single-paginationCounter">1</span>
-                    <span className="single-paginationCounter">2</span>
-                    <span className="single-paginationCounter">3</span>
+                    {paginationButtons().map((number) => (
+                        <a onClick={() => paginate(number)} key={number}
+                           className="single-paginationCounter">{number}</a>
+                    ))}
                 </div>
             </div>
         </Element>

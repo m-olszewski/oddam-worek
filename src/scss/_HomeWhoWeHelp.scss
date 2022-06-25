@@ -31,6 +31,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        font-weight: 500;
+        border: 2px solid $text-color;
+      }
     }
   }
 
@@ -46,6 +52,7 @@
     padding: 0 50px;
     gap: 30px;
     margin-bottom: 30px;
+    height: 212px;
 
     .single-organization {
       display: flex;
@@ -53,6 +60,7 @@
       align-items: center;
       padding-bottom: 15px;
       border-bottom: 1px solid $text-color;
+      font-family: $font-alt;
 
       &:last-child {
         border: none;
@@ -64,24 +72,25 @@
         align-items: flex-start;
 
         .fundacja {
+          font-weight: 300;
 
           .fundacja-name {
-
+            font-weight: 400;
           }
         }
 
         .mission {
           font-size: 12px;
-        }
+          font-weight: 300;
 
-        .mission-text {
-
+          .mission-text {
+            font-weight: 400;
+          }
         }
       }
 
       .single-organization-right {
         font-size: 12px;
-
       }
     }
   }
@@ -93,11 +102,11 @@
     .single-paginationCounter {
       padding: 10px;
       font-size: 12px;
+      cursor: pointer;
 
       &:first-child {
         border: 1px solid $text-color;
       }
     }
   }
-
 }
