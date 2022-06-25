@@ -26,14 +26,14 @@ const HomeHeaderNav = () => {
                     <Link to="organizations"
                           spy={true}
                           smooth={true}
-                          duration={500}
+                          duration={1000}
                     >Fundacja i organizacje</Link>
                 </li>
                 <li>
                     <Link to="contact"
                           spy={true}
                           smooth={true}
-                          duration={500}
+                          duration={1500}
                     >Kontakt</Link>
                 </li>
             </ul>
