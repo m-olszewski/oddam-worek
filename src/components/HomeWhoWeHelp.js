@@ -27,13 +27,14 @@ const SingleOrganization = (props) => {
     );
 };
 
-const HomeWhoWeHelp = () => {
+const HomeWhoWeHelp = (props) => {
     const [currentList, setCurrentList] = useState("fundacje");
     const [listType, setListType] = useState({
         description: "",
         foundationList: []
     });
     const [currentPage, setCurrentPage] = useState(1);
+
 
     const handleChangeCurrent = (listType) => () => {
         setCurrentList(listType)
@@ -53,7 +54,7 @@ const HomeWhoWeHelp = () => {
     const getItems = () => {
         const startList = (currentPage - 1) * foundationsPerPage
         const endList = startList + foundationsPerPage
-        console.log(`fundacji: ${numberOfFoundations}, stron: ${numberOfPages}`);
+        // console.log(`fundacji: ${numberOfFoundations}, stron: ${numberOfPages}`);
 
         return listType.foundationList.slice(startList, endList);
     };
@@ -64,11 +65,17 @@ const HomeWhoWeHelp = () => {
         for (let i = 1; i <= numberOfPages; i++) {
             pageNumbers.push(i)
         }
-        console.log(`numer str ${pageNumbers}`);
+        // console.log(`numer str ${pageNumbers}`);
         return pageNumbers;
     };
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => {
+        console.log(`numer str ${pageNumber}`);
+        return setCurrentPage(pageNumber);
+    }
+
+
+
 
     return (
         <Element name="organizations">
@@ -101,5 +108,21 @@ const HomeWhoWeHelp = () => {
         </Element>
     );
 };
+
+// const div = document.querySelector(".home-wwh-organizations-paginationCounter")
+// const pgntnBtns = div.querySelectorAll(".single-paginationCounter");
+// console.log(div);
+// // console.log(pgntnBtns);
+//
+// div.firstElementChild.classList.add("active");
+// div.addEventListener("click", (setActive));
+//
+// function setActive (e) {
+//     div.firstElementChild.classList.remove("active");
+//     pgntnBtns.forEach(e => {
+//         e.classList.remove("active");
+//     });
+//     e.target.classList.add("active");
+// }
 
 export default HomeWhoWeHelp;

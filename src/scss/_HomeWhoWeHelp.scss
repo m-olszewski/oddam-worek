@@ -104,9 +104,10 @@
       font-size: 12px;
       cursor: pointer;
 
-      &:first-child {
-        border: 1px solid $text-color;
-      }
+    }
+    .single-paginationCounter.active {
+      border: 1px solid $text-color;
+
     }
   }
 }
