@@ -1,0 +1,54 @@
+@import "settings/fonts";
+@import "settings/colors";
+
+.home-contact {
+  .home-contact-form {
+    h2 {
+
+    }
+
+    .contact-form {
+      .form-up {
+
+      }
+
+      .inputbox-content {
+        border: 1px solid black;
+        label {
+          border: 1px solid black;
+
+        }
+
+        input {
+          border: 1px solid black;
+
+        }
+
+        textarea {
+          border: 1px solid black;
+
+        }
+      }
+
+      .form-mid {
+
+      }
+
+      .form-down {
+
+      }
+    }
+  }
+
+  .home-contact-footer {
+    .home-contact-footer-copyright {
+
+    }
+
+    .home-contact-footer-icons {
+      svg {
+
+      }
+    }
+  }
+}
