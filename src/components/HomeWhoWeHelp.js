@@ -27,7 +27,7 @@ const SingleOrganization = (props) => {
     );
 };
 
-const HomeWhoWeHelp = (props) => {
+const HomeWhoWeHelp = () => {
     const [currentList, setCurrentList] = useState("fundacje");
     const [listType, setListType] = useState({
         description: "",
@@ -35,9 +35,9 @@ const HomeWhoWeHelp = (props) => {
     });
     const [currentPage, setCurrentPage] = useState(1);
 
-
     const handleChangeCurrent = (listType) => () => {
         setCurrentList(listType)
+        setCurrentPage(1)
     };
 
     useEffect(() => {
@@ -66,24 +66,22 @@ const HomeWhoWeHelp = (props) => {
             pageNumbers.push(i)
         }
         console.log(`ile str ${pageNumbers}`);
-        if (pageNumbers.length == 1) {
+        if (pageNumbers.length === 1) {
             return null
         } else {
 
             return (
                 pageNumbers.map((number) => (
                     <a onClick={() => paginate(number)} key={number}
-                       className="single-paginationCounter">{number}</a>
+                       className={`single-paginationCounter ${number === currentPage && "active"}`}>{number}</a>
                 )))
         }
-        // return pageNumbers;
     };
 
     const paginate = (pageNumber) => {
-        console.log(`numer str ${pageNumber}`);
+        // console.log(`numer str ${pageNumber}`);
         return setCurrentPage(pageNumber);
     }
-
 
     return (
         <Element name="organizations">
@@ -105,7 +103,6 @@ const HomeWhoWeHelp = (props) => {
                     ))
                     }
                 </div>
-
                 <div className="home-wwh-organizations-paginationCounter">
                     {paginationButtons()}
                 </div>
@@ -117,11 +114,11 @@ const HomeWhoWeHelp = (props) => {
 // const div = document.querySelector(".home-wwh-organizations-paginationCounter")
 // const pgntnBtns = div.querySelectorAll(".single-paginationCounter");
 // console.log(div);
-// // console.log(pgntnBtns);
-//
+// console.log(pgntnBtns);
+
 // div.firstElementChild.classList.add("active");
 // div.addEventListener("click", (setActive));
-//
+
 // function setActive (e) {
 //     div.firstElementChild.classList.remove("active");
 //     pgntnBtns.forEach(e => {
