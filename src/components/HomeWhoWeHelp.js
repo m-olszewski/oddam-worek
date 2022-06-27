@@ -65,16 +65,24 @@ const HomeWhoWeHelp = (props) => {
         for (let i = 1; i <= numberOfPages; i++) {
             pageNumbers.push(i)
         }
-        // console.log(`numer str ${pageNumbers}`);
-        return pageNumbers;
+        console.log(`ile str ${pageNumbers}`);
+        if (pageNumbers.length == 1) {
+            return null
+        } else {
+
+            return (
+                pageNumbers.map((number) => (
+                    <a onClick={() => paginate(number)} key={number}
+                       className="single-paginationCounter">{number}</a>
+                )))
+        }
+        // return pageNumbers;
     };
 
     const paginate = (pageNumber) => {
         console.log(`numer str ${pageNumber}`);
         return setCurrentPage(pageNumber);
     }
-
-
 
 
     return (
@@ -99,10 +107,7 @@ const HomeWhoWeHelp = (props) => {
                 </div>
 
                 <div className="home-wwh-organizations-paginationCounter">
-                    {paginationButtons().map((number) => (
-                        <a onClick={() => paginate(number)} key={number}
-                           className="single-paginationCounter">{number}</a>
-                    ))}
+                    {paginationButtons()}
                 </div>
             </div>
         </Element>
