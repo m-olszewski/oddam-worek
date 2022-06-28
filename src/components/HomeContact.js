@@ -6,70 +6,54 @@ import FBSvg from "../assets/icons/Facebook.svg";
 import IGSvg from "../assets/icons/Instagram.svg";
 
 const HomeContact = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [msg, setMsg] = useState('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam beatae consequuntur dicta doloremque dolorum expedi');
+    const [values, setValues] = useState({
+        name: '',
+        email: '',
+        msg: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam beatae consequuntur dicta doloremque dolorum expedi'
+    });
+    const [errorMessages, setErrorMessages] = useState(null);
 
-    let errors = [];
+    function handleChange(event) {
+        const {name, value} = event.target;
 
-    function handleNameChange(event) {
-        setName(event.target.value);
-
-        if (event.target.value.includes(' ')) {
-            errors.push('Podane imię jest nieprawidłowe!');
-            document.querySelector('.name-error-msg').innerText = 'Podane imię jest nieprawidłowe!';
-            document.querySelector('#name').classList.add('input-error');
-        } else {
-            document.querySelector('.name-error-msg').innerText = '';
-            document.querySelector('#name').classList.remove('input-error');
-        }
-
+        setValues(prevValues => ({
+            ...prevValues,
+            [name]: value,
+        }));
     }
 
-    function handleEmailChange(event) {
-        setEmail(event.target.value);
+    function validate(values) {
+        const errorMessages = {};
 
-
-        if (event.target.value.match('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')) {
-            document.querySelector('.email-error-msg').innerText = '';
-            document.querySelector('#email').classList.remove('input-error');
-        } else {
-            errors.push('Podany email jest nieprawidłowy!');
-            document.querySelector('.email-error-msg').innerText = 'Podany email jest nieprawidłowy!';
-            document.querySelector('#email').classList.add('input-error');
+        if (values.name.includes(' ')) {
+            errorMessages.name = 'Podane imię jest nieprawidłowe!';
         }
-    }
-    function handleMsgChange(event) {
-        setMsg(event.target.value);
 
-        console.log(event.target.value.length);
-        if (event.target.value.length <= 119) {
-            errors.push('Wiadomość musi mieć conajmniej 120 znaków!');
-            document.querySelector('.msg-error-msg').innerText = 'Wiadomość musi mieć conajmniej 120 znaków!';
-            document.querySelector('#msg').classList.add('input-error');
-        } else {
-            document.querySelector('.msg-error-msg').innerText = '';
-            document.querySelector('#msg').classList.remove('input-error');
+        if (!values.email.match('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')) {
+            errorMessages.email = 'Podany email jest nieprawidłowy!';
         }
+
+        if (values.msg.length < 120) {
+            errorMessages.msg = 'Wiadomość musi mieć conajmniej 120 znaków!';
+        }
+
+        return Object.keys(errorMessages).length > 0
+            ? errorMessages
+            : null;
     }
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(errors)
-        document.querySelector('.form-success-msg').classList.add('hidden');
-if (errors.length) {
-    document.querySelector('.form-success-msg').classList.remove('hidden');
-}
-else {
-    document.querySelector('.form-success-msg').classList.add('hidden');
+    const handleSubmit = event => {
+        event.preventDefault();
 
-}
-console.log(e);
+        const errorMessages = validate(values);
+        setErrorMessages(errorMessages);
+
+        if (errorMessages) return;
     };
 
     return (
         <Element name="contact">
-                        <div className="home-contact-bg">
+            <div className="home-contact-bg">
                 <div className="home-contact container">
                     <div className="home-contact-form">
                         <TitleSVG title1line="Skontaktuj się z nami"/>
@@ -79,21 +63,25 @@ console.log(e);
                             <div className="form-up">
                                 <div className="inputbox-content">
                                     <label htmlFor="name">Wpisz swoje imię</label>
-                                    <input id="name" name="name" type="text" value={name} onChange={handleNameChange}
-                                           required/>
-                                    <span className="name-error-msg error-msg"></span>
+                                    <input id="name" name="name" type="text" value={values.name} onChange={handleChange}
+                                           className={`${errorMessages?.name && "input-error"}`} required/>
+                                    {errorMessages?.name &&
+                                        <span className="error-message">{errorMessages?.name}</span>}
                                 </div>
                                 <div className="inputbox-content">
                                     <label htmlFor="email">Wpisz swój e-mail</label>
-                                    <input id="email" name="email" type="email" value={email}
-                                           onChange={handleEmailChange} required/>
-                                    <span className="email-error-msg error-msg"></span>
+                                    <input id="email" name="email" type="email" value={values.email}
+                                           onChange={handleChange}
+                                           className={`${errorMessages?.email && "input-error"}`} required/>
+                                    {errorMessages?.email &&
+                                        <span className="error-message">{errorMessages?.email}</span>}
                                 </div>
                             </div>
                             <div className="form-mid inputbox-content">
                                 <label htmlFor="msg">Wpisz swoją wiadomość</label>
-                                <textarea id="msg" name="msg" value={msg} onChange={handleMsgChange} required/>
-                                <span className="msg-error-msg error-msg"></span>
+                                <textarea id="msg" name="msg" value={values.msg} onChange={handleChange}
+                                          className={`${errorMessages?.msg && "input-error"}`} required/>
+                                {errorMessages?.msg && <span className="error-message">{errorMessages?.msg}</span>}
                             </div>
                             <input className="form-down" type="submit" value="Wyślij"/>
                         </form>
