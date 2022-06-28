@@ -65,7 +65,7 @@ const HomeWhoWeHelp = () => {
         for (let i = 1; i <= numberOfPages; i++) {
             pageNumbers.push(i)
         }
-        console.log(`ile str ${pageNumbers}`);
+        // console.log(`ile str ${pageNumbers}`);
         if (pageNumbers.length === 1) {
             return null
         } else {
