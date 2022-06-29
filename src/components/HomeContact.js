@@ -12,6 +12,7 @@ const HomeContact = () => {
         msg: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam beatae consequuntur dicta doloremque dolorum expedi'
     });
     const [errorMessages, setErrorMessages] = useState(null);
+    const [success, setSuccess] = useState(false);
 
     function handleChange(event) {
         const {name, value} = event.target;
@@ -47,8 +48,15 @@ const HomeContact = () => {
 
         const errorMessages = validate(values);
         setErrorMessages(errorMessages);
+        if (!errorMessages) {
+            setSuccess(true)
+            values.name = "";
+            values.email = "";
+            values.msg = "";
 
-        if (errorMessages) return;
+        } else {
+            console.log(errorMessages)
+        }
     };
 
     return (
@@ -57,9 +65,9 @@ const HomeContact = () => {
                 <div className="home-contact container">
                     <div className="home-contact-form">
                         <TitleSVG title1line="Skontaktuj się z nami"/>
-                        <span className="form-success-msg hidden">Wiadomość została wysłana! <br/> Wkrótce się skontaktujemy.</span>
+                        <span className={`form-success-msg ${success ? "" : "hidden"}`}>Wiadomość została wysłana! <br/> Wkrótce się skontaktujemy.</span>
 
-                        <form className="contact-form" onSubmit={handleSubmit}>
+                        <form noValidate className="contact-form" onSubmit={handleSubmit}>
                             <div className="form-up">
                                 <div className="inputbox-content">
                                     <label htmlFor="name">Wpisz swoje imię</label>
