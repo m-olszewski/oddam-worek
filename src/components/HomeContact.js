@@ -9,7 +9,7 @@ const HomeContact = () => {
     const [values, setValues] = useState({
         name: '',
         email: '',
-        msg: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam beatae consequuntur dicta doloremque dolorum expedi'
+        message: ''
     });
     const [errorMessages, setErrorMessages] = useState(null);
     const [success, setSuccess] = useState(false);
@@ -34,8 +34,8 @@ const HomeContact = () => {
             errorMessages.email = 'Podany email jest nieprawidłowy!';
         }
 
-        if (values.msg.length < 120) {
-            errorMessages.msg = 'Wiadomość musi mieć conajmniej 120 znaków!';
+        if (values.message.length < 120) {
+            errorMessages.message = 'Wiadomość musi mieć conajmniej 120 znaków!';
         }
 
         return Object.keys(errorMessages).length > 0
@@ -45,18 +45,32 @@ const HomeContact = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-
+        console.log(values)
         const errorMessages = validate(values);
         setErrorMessages(errorMessages);
         if (!errorMessages) {
             setSuccess(true)
+
+            fetch('https://fer-api.coderslab.pl/v1/portfolio/contact', {
+                method: 'POST',
+                body: JSON.stringify(values),
+                headers: {"Content-Type": "application/json"},
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} (${response.statusText})`);
+                    }
+                    return response;
+                })
+                .then(response => response.json())
+                .catch(console.log)
             values.name = "";
             values.email = "";
-            values.msg = "";
-
+            values.message = "";
         } else {
             console.log(errorMessages)
         }
+
     };
 
     return (
@@ -86,14 +100,16 @@ const HomeContact = () => {
                                 </div>
                             </div>
                             <div className="form-mid inputbox-content">
-                                <label htmlFor="msg">Wpisz swoją wiadomość</label>
-                                <textarea id="msg" name="msg" value={values.msg} onChange={handleChange}
-                                          className={`${errorMessages?.msg && "input-error"}`} required/>
-                                {errorMessages?.msg && <span className="error-message">{errorMessages?.msg}</span>}
+                                <label htmlFor="message">Wpisz swoją wiadomość</label>
+                                <textarea id="message" name="message" value={values.message} onChange={handleChange}
+                                          className={`${errorMessages?.message && "input-error"}`} required/>
+                                {errorMessages?.message &&
+                                    <span className="error-message">{errorMessages?.message}</span>}
                             </div>
                             <input className="form-down" type="submit" value="Wyślij"/>
                         </form>
                     </div>
+
                     <div className="home-contact-footer">
                         <span className="home-contact-footer-copyright">Copyright by Coders Lab</span>
                         <div className="home-contact-footer-icons">
